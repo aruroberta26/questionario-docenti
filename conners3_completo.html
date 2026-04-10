@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conners 3® – Questionario Insegnante</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== SCREEN STYLES ===== */
+:root {
+  --ink: #1c1c2e;
+  --paper: #f4f1eb;
+  --cream: #ebe7dd;
+  --white: #ffffff;
+  --border: #ccc8be;
+  --accent: #8b1a1a;
+  --teal: #1a6b5a;
+  --blue: #1a3a6b;
+  --shadow: rgba(28,28,46,0.10);
+  --r0: #3b82f6; --r1: #16a34a; --r2: #d97706; --r3: #dc2626;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.5}
+
+/* NAV */
+nav{background:var(--ink);color:#fff;display:flex;align-items:stretch;padding:0 1.5rem;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px var(--shadow)}
+.nav-logo{font-family:'Source Serif 4',serif;font-size:1rem;padding:0.85rem 1.2rem 0.85rem 0;border-right:1px solid rgba(255,255,255,0.12);margin-right:0.5rem;letter-spacing:0.01em;display:flex;align-items:center;gap:0.4rem}
+.nav-logo em{color:#f8a4a4;font-style:normal}
+.nav-tab{background:none;border:none;border-bottom:3px solid transparent;color:rgba(255,255,255,0.55);font-family:'Source Sans 3',sans-serif;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;padding:0 1rem;cursor:pointer;transition:.15s}
+.nav-tab:hover{color:#fff}
+.nav-tab.on{color:#fff;border-bottom-color:#f8a4a4}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:rgba(255,255,255,.45)}
+.badge{background:var(--accent);color:#fff;border-radius:12px;padding:2px 8px;font-size:.72rem;font-weight:700}
+
+/* PAGES */
+.pg{display:none;padding:1.8rem;max-width:960px;margin:0 auto}
+.pg.on{display:block}
+
+/* ===== FORM ===== */
+.form-hero{background:var(--ink);color:#fff;padding:2rem 2.5rem;border-radius:12px;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.form-hero::after{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border:50px solid rgba(255,255,255,.04);border-radius:50%}
+.form-hero h1{font-family:'Source Serif 4',serif;font-size:1.9rem;font-weight:600;margin-bottom:.3rem}
+.form-hero h1 em{color:#f8a4a4;font-style:normal}
+.form-hero p{color:rgba(255,255,255,.6);font-size:.84rem;max-width:580px;line-height:1.6}
+
+.legend{background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:.9rem 1.4rem;margin-bottom:1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center}
+.leg{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#555}
+.leg-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:#fff;flex-shrink:0}
+
+/* CARD */
+.card{background:var(--white);border:1px solid var(--border);border-radius:10px;margin-bottom:1.2rem;overflow:hidden;box-shadow:0 2px 6px var(--shadow)}
+.card-head{background:var(--cream);border-bottom:1px solid var(--border);padding:.65rem 1.4rem;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;gap:.5rem}
+.card-head .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.fgrid{padding:1.2rem 1.4rem;display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.fg{display:flex;flex-direction:column;gap:.25rem}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:.72rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.05em}
+.fg input,.fg select,.fg textarea{border:1px solid var(--border);border-radius:6px;padding:.48rem .75rem;font-family:'Source Sans 3',sans-serif;font-size:.88rem;background:var(--paper);color:var(--ink);transition:.15s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,107,90,.1)}
+.fg textarea{min-height:68px;resize:vertical}
+
+/* ITEMS */
+.section-label{padding:.65rem 1.4rem;background:var(--blue);color:#fff;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.item-row{display:grid;grid-template-columns:2.2rem 1fr auto;align-items:center;padding:.55rem 1rem .55rem 1.2rem;border-bottom:1px solid rgba(204,200,190,.45);gap:.6rem;transition:background .12s}
+.item-row:last-child{border-bottom:none}
+.item-row:hover{background:#faf8f4}
+.item-row.answered{background:#f8fcfb}
+.inum{font-size:.68rem;font-weight:700;color:#bbb;text-align:center}
+.itxt{font-size:.84rem;color:var(--ink);line-height:1.35}
+.rgroup{display:flex;gap:.3rem}
+.rbtn{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);background:#fff;cursor:pointer;font-weight:700;font-size:.76rem;color:#bbb;transition:.12s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rbtn:hover{border-color:var(--teal);color:var(--teal)}
+.rbtn.s0{background:var(--r0);border-color:var(--r0);color:#fff}
+.rbtn.s1{background:var(--r1);border-color:var(--r1);color:#fff}
+.rbtn.s2{background:var(--r2);border-color:var(--r2);color:#fff}
+.rbtn.s3{background:var(--r3);border-color:var(--r3);color:#fff}
+
+/* context items 112-113 */
+.ctx-row{padding:.8rem 1.4rem;display:flex;align-items:flex-start;gap:1rem;border-bottom:1px solid rgba(204,200,190,.45);flex-wrap:wrap}
+.ctx-row:last-of-type{border-bottom:none}
+.ctx-label{flex:1;font-size:.84rem;line-height:1.35;min-width:220px}
+.ctx-label strong{font-size:.72rem;color:#aaa;font-weight:700;margin-right:.3rem}
+
+/* progress */
+.pbar-wrap{background:var(--cream);border-top:1px solid var(--border);padding:.6rem 1.4rem;display:flex;align-items:center;gap:1rem}
+.pbar-track{flex:1;height:6px;background:#ddd;border-radius:3px;overflow:hidden}
+.pbar-fill{height:100%;background:var(--teal);border-radius:3px;transition:width .3s}
+.pbar-txt{font-size:.78rem;color:#888;white-space:nowrap}
+
+/* submit */
+.submit-row{padding:1.5rem 0;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.btn-main{background:var(--ink);color:#fff;border:none;border-radius:8px;padding:.78rem 1.8rem;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;transition:.15s;letter-spacing:.02em}
+.btn-main:hover{background:var(--teal)}
+.btn-sec{background:#fff;color:var(--ink);border:1.5px solid var(--border);border-radius:8px;padding:.78rem 1.4rem;font-family:'Source Sans 3',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;transition:.15s}
+.btn-sec:hover{border-color:var(--ink)}
+.btn-print{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.78rem 1.4rem;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;transition:.15s}
+.btn-print:hover{opacity:.85}
+.toast{background:#e8f7f0;border:1px solid #a0d4b8;border-radius:8px;padding:1rem 1.5rem;margin-bottom:1.2rem;display:none;text-align:center}
+.toast.on{display:block}
+.toast h3{color:#1a6b4a;font-size:.95rem;margin-bottom:.2rem}
+.toast p{color:#2d7a55;font-size:.82rem}
+
+/* ===== DASHBOARD ===== */
+.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;box-shadow:0 2px 6px var(--shadow)}
+.stat .n{font-family:'Source Serif 4',serif;font-size:2.4rem;color:var(--ink);line-height:1;margin-bottom:.2rem}
+.stat .l{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:#999;font-weight:700}
+.resp-list{display:flex;flex-direction:column;gap:.7rem}
+.resp-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 6px var(--shadow)}
+.resp-hd{padding:.9rem 1.4rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;gap:1rem;flex-wrap:wrap}
+.resp-hd:hover{background:var(--paper)}
+.rh-info{}
+.rh-name{font-weight:700;font-size:.95rem;margin-bottom:.15rem}
+.rh-meta{font-size:.75rem;color:#999}
+.rh-acts{display:flex;align-items:center;gap:.5rem}
+.tag{background:#e8f4f3;color:var(--teal);border-radius:20px;padding:2px 10px;font-size:.72rem;font-weight:700}
+.del-btn{background:#fff0f0;border:1px solid #fcc;color:var(--accent);border-radius:6px;padding:3px 10px;font-size:.72rem;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-weight:700;transition:.12s}
+.del-btn:hover{background:var(--accent);color:#fff}
+.expand{font-size:.9rem;color:#bbb;transition:.2s;flex-shrink:0}
+.resp-card.open .expand{transform:rotate(180deg)}
+.resp-body{display:none;border-top:1px solid var(--border);background:var(--paper);padding:1.4rem}
+.resp-card.open .resp-body{display:block}
+.anag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1.2rem;background:#fff;border-radius:8px;padding:.9rem 1rem;border:1px solid var(--border)}
+.af{display:flex;flex-direction:column;gap:.15rem}
+.af .k{font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:#bbb;font-weight:700}
+.af .v{font-size:.84rem;font-weight:600;color:var(--ink)}
+.ans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.25rem;margin-bottom:1rem}
+.ai{display:flex;align-items:flex-start;gap:.4rem;padding:.3rem .45rem;border-radius:5px;background:#fff;border:1px solid transparent}
+.ai.v1{border-color:#bbf7d0}
+.ai.v2{border-color:#fde68a}
+.ai.v3{border-color:#fecaca}
+.ai .an{font-size:.66rem;color:#ccc;width:1.6rem;flex-shrink:0;font-weight:700;padding-top:.05rem}
+.ai .at{font-size:.76rem;color:#555;flex:1;line-height:1.3}
+.ai .as{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:#fff;flex-shrink:0}
+.as.s0{background:var(--r0)}.as.s1{background:var(--r1)}.as.s2{background:var(--r2)}.as.s3{background:var(--r3)}
+.open-blk{margin-top:.8rem}
+.open-blk .oq{font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem}
+.open-blk .oa{background:#fff;border:1px solid var(--border);border-radius:6px;padding:.55rem .8rem;font-size:.84rem;color:var(--ink)}
+.empty{text-align:center;padding:3.5rem 1rem;color:#bbb}
+.empty .eico{font-size:2.5rem;margin-bottom:.8rem}
+.empty h3{font-size:1rem;color:#aaa;margin-bottom:.3rem}
+.print-btn-wrap{display:flex;justify-content:flex-end;margin-bottom:.4rem}
+
+/* ===== RIEPILOGO ===== */
+.riep-filters{background:#fff;border:1px solid var(--border);border-radius:10px;padding:.9rem 1.4rem;margin-bottom:1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;box-shadow:0 2px 6px var(--shadow)}
+.riep-filters label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#aaa}
+.riep-filters select{border:1px solid var(--border);border-radius:6px;padding:.38rem .6rem;font-family:'Source Sans 3',sans-serif;font-size:.82rem;background:var(--paper)}
+.dist-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;margin-bottom:1.5rem;box-shadow:0 2px 6px var(--shadow)}
+.dist-card h3{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#aaa;margin-bottom:1rem}
+.sbar{display:flex;align-items:center;gap:.7rem;margin-bottom:.55rem}
+.sbar-lbl{width:1.8rem;text-align:center;font-weight:700;font-size:.78rem}
+.sbar-tr{flex:1;height:10px;background:var(--cream);border-radius:5px;overflow:hidden}
+.sbar-fl{height:100%;border-radius:5px;transition:width .5s}
+.sbar-ct{width:4rem;font-size:.76rem;color:#aaa;text-align:right}
+.tbl-wrap{overflow-x:auto}
+table.rt{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--border);box-shadow:0 2px 6px var(--shadow);font-size:.8rem}
+table.rt th{background:var(--ink);color:#fff;padding:.6rem .8rem;text-align:left;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+table.rt td{padding:.5rem .8rem;border-bottom:1px solid var(--cream);vertical-align:middle}
+table.rt tr:last-child td{border-bottom:none}
+table.rt tr:hover td{background:var(--paper)}
+.chip{display:inline-flex;width:34px;height:20px;align-items:center;justify-content:center;border-radius:4px;font-weight:700;font-size:.72rem;color:#fff}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  nav,.no-print,button{display:none!important}
+  body{background:#fff;font-family:Arial,sans-serif;font-size:9pt;color:#000}
+  .pg{display:none!important}
+  #print-area{display:block!important}
+  #print-area *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{margin:12mm 14mm;size:A4}
+}
+#print-area{display:none}
+
+/* PRINT AREA */
+.pr-page{padding:0;font-family:Arial,sans-serif;font-size:8.5pt;color:#000;line-height:1.3}
+.pr-header{text-align:center;border-bottom:2px solid #000;padding-bottom:6pt;margin-bottom:8pt}
+.pr-header h1{font-size:14pt;font-weight:bold;margin-bottom:2pt}
+.pr-header h2{font-size:11pt;font-weight:bold;color:#333}
+.pr-anag{border:1px solid #999;padding:6pt 8pt;margin-bottom:8pt;display:grid;grid-template-columns:repeat(3,1fr);gap:4pt 10pt}
+.pr-anag-row{display:flex;flex-direction:column;gap:1pt}
+.pr-anag-row.full{grid-column:1/-1}
+.pr-anag-k{font-size:6.5pt;font-weight:bold;text-transform:uppercase;color:#666;letter-spacing:.5pt}
+.pr-anag-v{font-size:8pt;border-bottom:1px solid #ccc;padding-bottom:1pt;min-height:11pt}
+.pr-scale{display:flex;gap:12pt;margin-bottom:8pt;background:#f5f5f5;padding:4pt 6pt;border:1px solid #ddd;flex-wrap:wrap}
+.pr-scale-item{font-size:7.5pt}
+.pr-scale-item strong{margin-right:2pt}
+.pr-section-title{background:#1c1c2e;color:#fff;padding:3pt 6pt;font-size:7pt;font-weight:bold;text-transform:uppercase;letter-spacing:.5pt;margin-bottom:0;margin-top:6pt}
+.pr-items-table{width:100%;border-collapse:collapse;margin-bottom:4pt}
+.pr-items-table td{border:1px solid #ddd;padding:2pt 4pt;vertical-align:middle;font-size:7.5pt}
+.pr-items-table td.num{width:16pt;text-align:center;color:#999;font-size:6.5pt;font-weight:bold}
+.pr-items-table td.txt{font-size:7.5pt}
+.pr-items-table td.score{width:14pt;text-align:center;font-weight:bold;font-size:8pt}
+.pr-items-table td.score.s0{background:#3b82f6;color:#fff}
+.pr-items-table td.score.s1{background:#16a34a;color:#fff}
+.pr-items-table td.score.s2{background:#d97706;color:#fff}
+.pr-items-table td.score.s3{background:#dc2626;color:#fff}
+.pr-items-table td.score.empty{background:#eee;color:#aaa;font-size:6pt}
+.pr-items-table tr:nth-child(even) td{background:#fafafa}
+.pr-items-table tr:nth-child(even) td.score.s0{background:#3b82f6}
+.pr-items-table tr:nth-child(even) td.score.s1{background:#16a34a}
+.pr-items-table tr:nth-child(even) td.score.s2{background:#d97706}
+.pr-items-table tr:nth-child(even) td.score.s3{background:#dc2626}
+.pr-open{border:1px solid #ddd;padding:5pt 6pt;margin-top:3pt;margin-bottom:4pt}
+.pr-open-q{font-size:7pt;font-weight:bold;color:#555;margin-bottom:2pt}
+.pr-open-a{font-size:8pt;min-height:16pt;border-bottom:1px solid #ccc;padding-bottom:2pt}
+.pr-footer{border-top:1px solid #999;margin-top:8pt;padding-top:4pt;font-size:6.5pt;color:#888;text-align:center}
+.pr-pagebreak{page-break-before:always;margin-top:0;padding-top:0}
+.pr-ctx{display:grid;grid-template-columns:1fr 1fr;gap:6pt;margin-bottom:4pt}
+.pr-ctx-item{}
+.pr-ctx-item .cq{font-size:7.5pt;margin-bottom:2pt}
+.pr-ctx-item .cscore{display:inline-flex;gap:3pt;margin-top:1pt}
+.pr-ctx-item .cs{width:14pt;height:14pt;border:1px solid #999;display:inline-flex;align-items:center;justify-content:center;font-size:7pt;font-weight:bold}
+.pr-ctx-item .cs.marked{background:#1c1c2e;color:#fff}
+
+@media screen{
+  .pr-page{max-width:800px;margin:0 auto;padding:20px;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.15);border-radius:8px}
+  .pr-print-btn{display:flex;justify-content:flex-end;gap:.7rem;margin-bottom:1rem}
+  #print-area{display:none;padding:1.5rem;max-width:920px;margin:0 auto}
+  #print-area.on{display:block}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Conners <em>3®</em></div>
+  <button class="nav-tab on" onclick="goto('form')">📝 Compila</button>
+  <button class="nav-tab" onclick="goto('dash')">📋 Risposte</button>
+  <button class="nav-tab" onclick="goto('riep')">📊 Riepilogo</button>
+  <div class="nav-right">Compilazioni: <span class="badge" id="cnt">0</span></div>
+</nav>
+
+<!-- ===================== FORM ===================== -->
+<div id="pg-form" class="pg on">
+  <div class="form-hero">
+    <h1>Conners <em>3®</em> – Insegnante · Forma estesa</h1>
+    <p>Rispondete pensando al comportamento dell'alunno/a <strong style="color:#f8a4a4">nell'ultimo mese</strong>. Leggete attentamente ogni frase e segnate quanto la descrive bene o quanto spesso si è verificata.</p>
+  </div>
+
+  <div class="toast" id="toast"><h3>✅ Questionario inviato con successo!</h3><p>Risposte salvate. Vai in "Risposte" per visualizzarle o stamparle.</p></div>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--r0)">0</div>Per niente vero (mai, quasi mai)</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--r1)">1</div>Poco vero (occasionalmente)</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--r2)">2</div>Abbastanza vero (spesso, tante volte)</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--r3)">3</div>Molto vero (molto spesso, molto frequentemente)</div>
+  </div>
+
+  <!-- DATI INSEGNANTE -->
+  <div class="card">
+    <div class="card-head"><div class="dot"></div>Dati Insegnante</div>
+    <div class="fgrid">
+      <div class="fg"><label>Nome e Cognome *</label><input id="f-ins-nome" type="text" placeholder="es. Maria Rossi"></div>
+      <div class="fg"><label>Materia insegnata</label><input id="f-ins-mat" type="text" placeholder="es. Italiano"></div>
+      <div class="fg"><label>Genere</label>
+        <select id="f-ins-gen"><option value="">— seleziona —</option><option value="M">M – Maschio</option><option value="F">F – Femmina</option></select></div>
+      <div class="fg"><label>Da quanti mesi conosce l'alunno/a</label><input id="f-ins-mesi" type="number" min="0" placeholder="es. 8"></div>
+    </div>
+  </div>
+
+  <!-- DATI ALUNNO -->
+  <div class="card">
+    <div class="card-head"><div class="dot"></div>Dati Alunno/a</div>
+    <div class="fgrid">
+      <div class="fg full"><label>Nome e Cognome *</label><input id="f-alu-nome" type="text" placeholder="es. Marco Verdi"></div>
+      <div class="fg"><label>Genere</label>
+        <select id="f-alu-gen"><option value="">— seleziona —</option><option value="M">M – Maschio</option><option value="F">F – Femmina</option></select></div>
+      <div class="fg"><label>Data di nascita</label><input id="f-alu-nasc" type="date"></div>
+      <div class="fg"><label>Età (anni)</label><input id="f-alu-eta" type="number" min="4" max="18" placeholder="es. 10"></div>
+      <div class="fg"><label>Classe frequentata</label><input id="f-alu-cls" type="text" placeholder="es. 3ª B"></div>
+      <div class="fg"><label>Etnia</label><input id="f-alu-etnia" type="text" placeholder="(opzionale)"></div>
+      <div class="fg"><label>Data di compilazione</label><input id="f-data" type="date"></div>
+    </div>
+  </div>
+
+  <!-- ITEMS 1-111 -->
+  <div class="card" id="items-card">
+    <div class="section-label">Affermazioni comportamentali — Item 1 · 111 &nbsp;(scala 0–3)</div>
+    <div id="items-body"></div>
+    <div class="pbar-wrap">
+      <div class="pbar-track"><div class="pbar-fill" id="pbar" style="width:0%"></div></div>
+      <div class="pbar-txt" id="pbar-txt">0 / 111</div>
+    </div>
+  </div>
+
+  <!-- ITEM 112-113 + open -->
+  <div class="card">
+    <div class="section-label">Domande sul contesto — Item 112 · 115</div>
+    <div style="padding:.6rem 1.4rem 0">
+      <div class="ctx-row">
+        <div class="ctx-label"><strong>112.</strong> I problemi dell'alunno/a influiscono molto negativamente sul suo studio o sul suo rendimento</div>
+        <div class="rgroup" id="r112"></div>
+      </div>
+      <div class="ctx-row">
+        <div class="ctx-label"><strong>113.</strong> I problemi dell'alunno/a influiscono molto negativamente sulle sue amicizie e sulle sue relazioni interpersonali</div>
+        <div class="rgroup" id="r113"></div>
+      </div>
+    </div>
+    <div style="padding:.8rem 1.4rem">
+      <div class="fg" style="margin-bottom:.8rem">
+        <label>114. Ha altre preoccupazioni riguardo a questo/a alunno/a?</label>
+        <textarea id="f-q114" placeholder="Scrivi qui le tue osservazioni..."></textarea>
+      </div>
+      <div class="fg">
+        <label>115. Quali sono le abilità o i punti di forza di questo/a alunno/a?</label>
+        <textarea id="f-q115" placeholder="Descrivi i punti di forza..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="submit-row">
+    <button class="btn-main" onclick="submit()">💾 Invia questionario</button>
+    <button class="btn-sec" onclick="clearForm()">↺ Ricomincia</button>
+  </div>
+</div>
+
+<!-- ===================== DASHBOARD ===================== -->
+<div id="pg-dash" class="pg">
+  <h2 style="font-family:'Source Serif 4',serif;font-size:1.7rem;margin-bottom:.3rem">Risposte Individuali</h2>
+  <p style="color:#aaa;font-size:.84rem;margin-bottom:1.4rem">Clicca su una scheda per espandere. Usa "Stampa PDF" per generare il documento fedele all'originale.</p>
+  <div class="dash-stats">
+    <div class="stat"><div class="n" id="d-tot">0</div><div class="l">Compilazioni</div></div>
+    <div class="stat"><div class="n" id="d-alu">0</div><div class="l">Alunni</div></div>
+    <div class="stat"><div class="n" id="d-doc">0</div><div class="l">Docenti</div></div>
+  </div>
+  <div class="resp-list" id="resp-list"></div>
+</div>
+
+<!-- ===================== RIEPILOGO ===================== -->
+<div id="pg-riep" class="pg">
+  <h2 style="font-family:'Source Serif 4',serif;font-size:1.7rem;margin-bottom:.3rem">Riepilogo Aggregato</h2>
+  <p style="color:#aaa;font-size:.84rem;margin-bottom:1.4rem">Media e distribuzione dei punteggi per ogni item</p>
+  <div class="riep-filters">
+    <label>Alunno:</label>
+    <select id="rf-alu" onchange="drawRiep()"><option value="">Tutti</option></select>
+    <label>Docente:</label>
+    <select id="rf-doc" onchange="drawRiep()"><option value="">Tutti</option></select>
+  </div>
+  <div class="dist-card">
+    <h3>Distribuzione globale dei punteggi</h3>
+    <div id="score-dist"></div>
+  </div>
+  <div class="tbl-wrap">
+    <table class="rt">
+      <thead><tr><th>#</th><th>Affermazione</th><th>Media</th><th style="color:#93c5fd">0</th><th style="color:#86efac">1</th><th style="color:#fcd34d">2</th><th style="color:#fca5a5">3</th><th>N</th></tr></thead>
+      <tbody id="riep-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===================== PRINT AREA ===================== -->
+<div id="print-area">
+  <div class="pr-print-btn no-print">
+    <button class="btn-sec" onclick="hidePrint()">← Torna alle risposte</button>
+    <button class="btn-print" onclick="window.print()">🖨️ Stampa / Salva PDF</button>
+  </div>
+  <div id="pr-content"></div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const ITEMS = [
+  "Si alza quando dovrebbe stare seduto/a",
+  "Si eccita eccessivamente",
+  "Ha tempi di attenzione brevi",
+  "Si agita o si dimena sulla sedia",
+  "Non riesce a fare le cose correttamente",
+  "Inizia un compito o un progetto senza fare un piano",
+  "È irrequieto/a o iperattivo/a",
+  "Minaccia di ferire gli altri",
+  "Risponde senza pensare prima che la domanda sia completata",
+  "Danneggia o distrugge le cose degli altri intenzionalmente",
+  "Ha difficoltà a iniziare compiti o progetti",
+  "Non ricorda ciò che legge",
+  "È eccitabile, impulsivo/a",
+  "Usa armi (ad esempio, una mazza, un mattone, una bottiglia rotta, un coltello o una pistola)",
+  "È paziente e contento/a, anche quando fa una lunga fila",
+  "Non riesce a decidere quali cose siano le più importanti",
+  "Agisce come se fosse guidato/a da un motore",
+  "Dimentica velocemente le istruzioni",
+  "Ha difficoltà a mantenere le amicizie",
+  "Finisce le cose che deve fare all'ultimo momento",
+  "È crudele verso gli animali",
+  "Ha scatti di rabbia; un comportamento esplosivo e imprevedibile",
+  "Viene facilmente distratto/a da stimoli visivi o uditivi",
+  "Corre o si arrampica quando non dovrebbe",
+  "Non porta a termine le cose che comincia",
+  "Parla senza aspettare il proprio turno",
+  "Ruba affrontando gli altri (aggressione, scippo, rapina a mano armata)",
+  "È perfetto/a in tutto",
+  "Interrompe gli altri (si intromette in conversazioni o giochi)",
+  "Deve sforzarsi per portare a termine compiti difficili",
+  "Ruba di nascosto (taccheggio o falsificazione)",
+  "È chiassoso/a e rumoroso/a mentre gioca o nel tempo libero",
+  "Ha forzato qualcuno a un atto sessuale",
+  "Non ha amici",
+  "Fa del male fisico agli altri",
+  "Fa errori",
+  "Non fa attenzione ai dettagli; fa errori di distrazione",
+  "È arrabbiato/a e risentito/a",
+  "Diventa sovraeccitato/a o 'su di giri'",
+  "Mente per evitare di fare qualcosa o per ottenere qualcosa",
+  "Si arrende facilmente di fronte a compiti difficili",
+  "Sembra non essere accettato/a dal gruppo",
+  "È spietato/a e crudele",
+  "Viene distratto/a facilmente",
+  "È mediocre in ortografia",
+  "Cambia d'umore rapidamente e drasticamente",
+  "Discute con gli adulti",
+  "Disturba gli altri (bambini/ragazzi)",
+  "È triste, malinconico/a o irritabile per tanti giorni di seguito",
+  "Parla troppo",
+  "Cerca di vendicarsi degli altri",
+  "Ha difficoltà nella lettura",
+  "Ha perso interesse o piacere per alcune attività",
+  "Marina la scuola",
+  "Dice la verità; non dice nemmeno piccole bugie a fin di bene",
+  "È irritabile e facilmente disturbato/a dagli altri",
+  "Non porta a termine i compiti scolastici o altri compiti (anche quando capisce e cerca di cooperare)",
+  "Diventa irritabile quando è in ansia",
+  "Infastidisce gli altri intenzionalmente",
+  "Evita o prova avversione per cose che richiedono molto sforzo e non sono divertenti",
+  "Ha intenzionalmente appiccato un fuoco con lo scopo di causare un danno",
+  "Perde la calma",
+  "Non capisce ciò che legge",
+  "Incolpa gli altri dei suoi errori o della sua cattiva condotta",
+  "Dimentica le cose che aveva imparato",
+  "È bravo/a a pianificare per il futuro",
+  "Sembra stanco/a; ha poca energia",
+  "Si mette nei guai con la polizia",
+  "Non sembra ascoltare ciò che gli/le viene detto",
+  "È egoista ed egocentrico/a nei confronti degli altri",
+  "Rifiuta attivamente di fare ciò che gli adulti gli/le dicono di fare",
+  "Non riesce a capire l'aritmetica",
+  "Non segue le istruzioni (anche quando capisce e cerca di cooperare)",
+  "Interagisce bene con gli altri (bambini/ragazzi)",
+  "Piange spesso e facilmente",
+  "Ha difficoltà ad aspettare il proprio turno",
+  "Si agita",
+  "Si muove continuamente",
+  "Si preoccupa per molte cose",
+  "Ha scarse abilità sociali",
+  "È felice, allegro/a e ha un atteggiamento positivo",
+  "Ha difficoltà a controllare le proprie preoccupazioni",
+  "Parla ininterrottamente",
+  "Le sue esigenze devono essere soddisfatte immediatamente – è facilmente frustrato/a",
+  "Non sembra dispiaciuto/a per la sua cattiva condotta",
+  "Si annoia",
+  "Sembra teso/a, nervoso/a o eccitabile",
+  "È distratto/a nelle attività quotidiane",
+  "Non sa come farsi degli amici",
+  "Si è introdotto/a in casa, nell'edificio o nell'automobile di qualcun altro",
+  "Si alza e si muove durante le lezioni",
+  "Smarrisce le cose (compiti, matite, libri, attrezzatura o giocattoli)",
+  "È difficile da accontentare o da far divertire",
+  "Ha bisogno di ulteriori spiegazioni delle istruzioni",
+  "Si sente inutile",
+  "Si mette nei guai con gli insegnanti o con il/la preside della scuola",
+  "Ha difficoltà a concentrarsi",
+  "È prepotente con gli altri, li minaccia o li spaventa",
+  "Ha bisogno di aiuto per suddividere un compito complesso in parti più piccole e più gestibili",
+  "È disattento/a, facilmente distratto/a",
+  "Non riesco a capire cosa lo/la rende felice",
+  "Agisce in modo subdolo o manipolatorio",
+  "Ha difficoltà a organizzare compiti o attività",
+  "È uno/a degli ultimi a essere scelto/a per far parte di una squadra o di un gioco",
+  "Inizia di proposito delle risse con gli altri",
+  "Si dimentica di consegnare i compiti fatti",
+  "È divertente averlo/a in giro",
+  "Ha difficoltà a passare da un compito a un altro",
+  "Si comporta come un angioletto",
+  "È difficile da motivare (anche con ricompense altamente desiderabili)",
+  "Ha difficoltà a mantenere la concentrazione su un compito o su un gioco"
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let answers = new Array(111).fill(null);
+let ctx = {r112:null, r113:null, q114:'', q115:''};
+let responses = [];
+
+// ============================================================
+// STORAGE
+// ============================================================
+async function loadData(){
+  try {
+    const r = await window.storage.get('c3_responses',true);
+    if(r && r.value) responses = JSON.parse(r.value);
+  } catch(e){ responses=[]; }
+  updateCount();
+}
+async function saveData(){
+  try { await window.storage.set('c3_responses', JSON.stringify(responses), true); }
+  catch(e){ console.error(e); }
+}
+
+// ============================================================
+// BUILD FORM
+// ============================================================
+function buildForm(){
+  const body = document.getElementById('items-body');
+  body.innerHTML = ITEMS.map((txt,i)=>`
+    <div class="item-row" id="ir-${i}">
+      <div class="inum">${i+1}</div>
+      <div class="itxt">${txt}</div>
+      <div class="rgroup">
+        ${[0,1,2,3].map(v=>`<button class="rbtn" id="rb-${i}-${v}" onclick="setA(${i},${v})">${v}</button>`).join('')}
+      </div>
+    </div>`).join('');
+
+  ['r112','r113'].forEach(id=>{
+    document.getElementById(id).innerHTML =
+      [0,1,2,3].map(v=>`<button class="rbtn" id="${id}-${v}" onclick="setCtx('${id}',${v})">${v}</button>`).join('');
+  });
+
+  document.getElementById('f-data').value = new Date().toISOString().split('T')[0];
+}
+
+function setA(i,v){
+  answers[i]=v;
+  [0,1,2,3].forEach(x=>{
+    const b=document.getElementById(`rb-${i}-${x}`);
+    b.className='rbtn'+(x===v?` s${v}`:'');
+  });
+  document.getElementById(`ir-${i}`).classList.toggle('answered',true);
+  updatePbar();
+}
+
+function setCtx(id,v){
+  ctx[id]=v;
+  [0,1,2,3].forEach(x=>{
+    const b=document.getElementById(`${id}-${x}`);
+    b.className='rbtn'+(x===v?` s${v}`:'');
+  });
+}
+
+function updatePbar(){
+  const done=answers.filter(a=>a!==null).length;
+  const pct=Math.round(done/111*100);
+  document.getElementById('pbar').style.width=pct+'%';
+  document.getElementById('pbar-txt').textContent=`${done} / 111`;
+}
+
+// ============================================================
+// SUBMIT
+// ============================================================
+function submit(){
+  const iNome=document.getElementById('f-ins-nome').value.trim();
+  const aNome=document.getElementById('f-alu-nome').value.trim();
+  if(!iNome||!aNome){ alert('Inserisci il nome dell\'insegnante e dell\'alunno/a per procedere.'); return; }
+  const done=answers.filter(a=>a!==null).length;
+  if(done<111 && !confirm(`Hai risposto a ${done}/111 item. Inviare comunque?`)) return;
+  const entry={
+    id: Date.now().toString(),
+    ts: new Date().toISOString(),
+    ins:{nome:iNome, mat:document.getElementById('f-ins-mat').value.trim(), gen:document.getElementById('f-ins-gen').value, mesi:document.getElementById('f-ins-mesi').value},
+    alu:{nome:aNome, gen:document.getElementById('f-alu-gen').value, nasc:document.getElementById('f-alu-nasc').value, eta:document.getElementById('f-alu-eta').value, cls:document.getElementById('f-alu-cls').value.trim(), etnia:document.getElementById('f-alu-etnia').value.trim(), data:document.getElementById('f-data').value},
+    ans:[...answers],
+    r112:ctx.r112, r113:ctx.r113,
+    q114:document.getElementById('f-q114').value.trim(),
+    q115:document.getElementById('f-q115').value.trim(),
+  };
+  responses.unshift(entry);
+  saveData();
+  updateCount();
+  clearForm();
+  const t=document.getElementById('toast'); t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'),5000);
+}
+
+function clearForm(){
+  answers=new Array(111).fill(null);
+  ctx={r112:null,r113:null,q114:'',q115:''};
+  ['f-ins-nome','f-ins-mat','f-ins-mesi','f-alu-nome','f-alu-eta','f-alu-cls','f-alu-etnia','f-q114','f-q115'].forEach(id=>document.getElementById(id).value='');
+  ['f-ins-gen','f-alu-gen'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-alu-nasc').value='';
+  document.getElementById('f-data').value=new Date().toISOString().split('T')[0];
+  buildForm(); updatePbar(); window.scrollTo(0,0);
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function drawDash(){
+  const total=responses.length;
+  const alunni=new Set(responses.map(r=>r.alu.nome)).size;
+  const docenti=new Set(responses.map(r=>r.ins.nome)).size;
+  document.getElementById('d-tot').textContent=total;
+  document.getElementById('d-alu').textContent=alunni;
+  document.getElementById('d-doc').textContent=docenti;
+  const list=document.getElementById('resp-list');
+  if(!total){
+    list.innerHTML=`<div class="empty"><div class="eico">📋</div><h3>Nessuna risposta</h3><p>Le risposte inviate appariranno qui</p></div>`;
+    return;
+  }
+  list.innerHTML=responses.map(r=>{
+    const done=r.ans.filter(a=>a!==null).length;
+    const dt=new Date(r.ts).toLocaleDateString('it-IT');
+    const ansBadges=r.ans.map((a,i)=>{
+      if(a===null)return'';
+      return`<div class="ai${a>0?' v'+a:''}"><span class="an">${i+1}</span><span class="at">${ITEMS[i].substring(0,52)}${ITEMS[i].length>52?'…':''}</span><span class="as s${a}">${a}</span></div>`;
+    }).join('');
+    return`<div class="resp-card" id="rc-${r.id}">
+      <div class="resp-hd" onclick="toggle('${r.id}')">
+        <div class="rh-info">
+          <div class="rh-name">👤 ${r.alu.nome||'—'} <span style="font-weight:400;color:#aaa">· ${r.ins.nome||'—'}</span></div>
+          <div class="rh-meta">📅 ${dt} · Classe ${r.alu.cls||'—'} · ${done}/111 item</div>
+        </div>
+        <div class="rh-acts">
+          <span class="tag">${r.ins.mat||'—'}</span>
+          <button class="btn-print no-print" onclick="printResp('${r.id}',event)" style="font-size:.75rem;padding:4px 10px">🖨️ Stampa PDF</button>
+          <button class="del-btn" onclick="delResp('${r.id}',event)">✕</button>
+          <span class="expand">▼</span>
+        </div>
+      </div>
+      <div class="resp-body">
+        <div class="anag-grid">
+          <div class="af"><span class="k">Alunno/a</span><span class="v">${r.alu.nome||'—'}</span></div>
+          <div class="af"><span class="k">Classe</span><span class="v">${r.alu.cls||'—'}</span></div>
+          <div class="af"><span class="k">Età</span><span class="v">${r.alu.eta||'—'} anni</span></div>
+          <div class="af"><span class="k">Docente</span><span class="v">${r.ins.nome||'—'}</span></div>
+          <div class="af"><span class="k">Materia</span><span class="v">${r.ins.mat||'—'}</span></div>
+          <div class="af"><span class="k">Data</span><span class="v">${dt}</span></div>
+        </div>
+        <div class="ans-grid">${ansBadges}</div>
+        ${r.r112!==null||r.r113!==null?`<div style="display:flex;gap:1.2rem;margin-bottom:.6rem;font-size:.82rem">
+          ${r.r112!==null?`<span>Item 112 (rendimento): <strong>${r.r112}</strong></span>`:''}
+          ${r.r113!==null?`<span>Item 113 (relazioni): <strong>${r.r113}</strong></span>`:''}
+        </div>`:''}
+        ${r.q114||r.q115?`<div class="open-blk">
+          ${r.q114?`<div style="margin-bottom:.6rem"><div class="oq">114. Preoccupazioni</div><div class="oa">${r.q114}</div></div>`:''}
+          ${r.q115?`<div><div class="oq">115. Punti di forza</div><div class="oa">${r.q115}</div></div>`:''}
+        </div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggle(id){
+  document.getElementById('rc-'+id).classList.toggle('open');
+}
+function delResp(id,e){
+  e.stopPropagation();
+  if(!confirm('Eliminare questa risposta?'))return;
+  responses=responses.filter(r=>r.id!==id);
+  saveData(); updateCount(); drawDash(); drawRiep();
+}
+
+// ============================================================
+// PRINT SINGLE RESPONSE – faithful to original layout
+// ============================================================
+function printResp(id,e){
+  e.stopPropagation();
+  const r=responses.find(x=>x.id===id);
+  if(!r)return;
+  const dt=r.alu.data||new Date(r.ts).toISOString().split('T')[0];
+  const dtFmt=dt.split('-').reverse().join('/');
+  const nasc=r.alu.nasc?r.alu.nasc.split('-').reverse().join('/'):'';
+
+  // Build items table rows — split into two columns (left: 1-57, right: 58-111) per page like original
+  function itemsBlock(items){
+    return items.map(([idx,txt,ans])=>{
+      const sc=ans!==null?`<td class="score s${ans}">${ans}</td>`:`<td class="score empty">—</td>`;
+      return`<tr><td class="num">${idx}</td><td class="txt">${txt}</td>${sc}</tr>`;
+    }).join('');
+  }
+
+  // Group items in chunks for the two-column layout
+  const all=ITEMS.map((txt,i)=>[i+1,txt,r.ans[i]]);
+  // Page 2: items 1–62, Page 3: items 63–111
+  const page2=all.slice(0,62);
+  const page3=all.slice(62,111);
+
+  const html=`
+  <div class="pr-page">
+    <!-- PAGE 1: header + anagrafiche -->
+    <div class="pr-header">
+      <h1>C. Keith Conners — Conners 3® – Insegnante</h1>
+      <h2>Questionario — Forma estesa</h2>
+      <p style="font-size:7.5pt;color:#555;margin-top:4pt">Adattamento italiano di Caterina Primi e Dino Maschietto · DSM-5 Updates</p>
+    </div>
+
+    <div class="pr-scale">
+      <div class="pr-scale-item"><strong>0</strong> = Per niente vero (mai, quasi mai)</div>
+      <div class="pr-scale-item"><strong>1</strong> = Poco vero (occasionalmente)</div>
+      <div class="pr-scale-item"><strong>2</strong> = Abbastanza vero (spesso, tante volte)</div>
+      <div class="pr-scale-item"><strong>3</strong> = Molto vero (molto spesso, molto frequentemente)</div>
+    </div>
+
+    <div style="margin-bottom:6pt;font-size:8pt;font-weight:bold;border-bottom:1px solid #999;padding-bottom:3pt">DATI INSEGNANTE</div>
+    <div class="pr-anag">
+      <div class="pr-anag-row"><div class="pr-anag-k">Nome e Cognome</div><div class="pr-anag-v">${r.ins.nome||''}</div></div>
+      <div class="pr-anag-row"><div class="pr-anag-k">Materia insegnata</div><div class="pr-anag-v">${r.ins.mat||''}</div></div>
+      <div class="pr-anag-row"><div class="pr-anag-k">Genere</div><div class="pr-anag-v">${r.ins.gen||''}</div></div>
+      <div class="pr-anag-row full"><div class="pr-anag-k">Da quanti mesi conosce l'alunno/a</div><div class="pr-anag-v">${r.ins.mesi||''} mesi</div></div>
+    </div>
+
+    <div style="margin-bottom:6pt;font-size:8pt;font-weight:bold;border-bottom:1px solid #999;padding-bottom:3pt;margin-top:8pt">DATI ALUNNO/A</div>
+    <div class="pr-anag">
+      <div class="pr-anag-row full"><div class="pr-anag-k">Nome e Cognome</div><div class="pr-anag-v">${r.alu.nome||''}</div></div>
+      <div class="pr-anag-row"><div class="pr-anag-k">Genere</div><div class="pr-anag-v">${r.alu.gen||''}</div></div>
+      <div class="pr-anag-row"><div class="pr-anag-k">Data di nascita</div><div class="pr-anag-v">${nasc}</div></div>
+      <div class="pr-anag-row"><div class="pr-anag-k">Età</div><div class="pr-anag-v">${r.alu.eta||''} anni</div></div>
+      <div class="pr-anag-row"><div class="pr-anag-k">Classe frequentata</div><div class="pr-anag-v">${r.alu.cls||''}</div></div>
+      <div class="pr-anag-row"><div class="pr-anag-k">Etnia</div><div class="pr-anag-v">${r.alu.etnia||''}</div></div>
+      <div class="pr-anag-row"><div class="pr-anag-k">Data di compilazione</div><div class="pr-anag-v">${dtFmt}</div></div>
+    </div>
+    <div class="pr-footer">Conners 3® | Questionario – Forma estesa – Insegnante &nbsp;·&nbsp; Giunti O.S. Psychometrics S.r.l. &nbsp;·&nbsp; Pagina 1</div>
+  </div>
+
+  <!-- PAGE 2: items 1-62 -->
+  <div class="pr-page pr-pagebreak">
+    <div style="font-size:7.5pt;margin-bottom:5pt;display:flex;justify-content:space-between">
+      <span><strong>Nell'ultimo mese, questo è stato...</strong></span>
+      <span>0=Per niente vero &nbsp;|&nbsp; 1=Poco vero &nbsp;|&nbsp; 2=Abbastanza vero &nbsp;|&nbsp; 3=Molto vero</span>
+    </div>
+    <div class="pr-section-title">Item 1 – 62</div>
+    <table class="pr-items-table">
+      <colgroup><col style="width:16pt"><col><col style="width:14pt"></colgroup>
+      <tbody>${itemsBlock(page2)}</tbody>
+    </table>
+    <div class="pr-footer">Conners 3® | Questionario – Forma estesa – Insegnante &nbsp;·&nbsp; Pagina 2</div>
+  </div>
+
+  <!-- PAGE 3: items 63-111 + context -->
+  <div class="pr-page pr-pagebreak">
+    <div style="font-size:7.5pt;margin-bottom:5pt;display:flex;justify-content:space-between">
+      <span><strong>Nell'ultimo mese, questo è stato...</strong></span>
+      <span>0=Per niente vero &nbsp;|&nbsp; 1=Poco vero &nbsp;|&nbsp; 2=Abbastanza vero &nbsp;|&nbsp; 3=Molto vero</span>
+    </div>
+    <div class="pr-section-title">Item 63 – 111</div>
+    <table class="pr-items-table">
+      <colgroup><col style="width:16pt"><col><col style="width:14pt"></colgroup>
+      <tbody>${itemsBlock(page3)}</tbody>
+    </table>
+
+    <!-- 112-113 -->
+    <div class="pr-section-title" style="margin-top:8pt">Domande sul contesto (item 112–113)</div>
+    <div style="font-size:7pt;margin:3pt 0 3pt;color:#666">Pensi alle risposte che ha fornito finora, poi indichi la Sua risposta alle due seguenti frasi</div>
+    <div class="pr-ctx">
+      <div class="pr-ctx-item">
+        <div class="cq"><strong>112.</strong> I problemi dell'alunno/a influiscono molto negativamente sul suo studio o sul suo rendimento</div>
+        <div class="cscore">
+          ${[0,1,2,3].map(v=>`<span class="cs${r.r112===v?' marked':''}">${v}</span>`).join('')}
+        </div>
+      </div>
+      <div class="pr-ctx-item">
+        <div class="cq"><strong>113.</strong> I problemi dell'alunno/a influiscono molto negativamente sulle sue amicizie e sulle sue relazioni interpersonali</div>
+        <div class="cscore">
+          ${[0,1,2,3].map(v=>`<span class="cs${r.r113===v?' marked':''}">${v}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- Open questions -->
+    <div class="pr-section-title" style="margin-top:8pt">Domande aperte</div>
+    <div class="pr-open" style="margin-top:4pt">
+      <div class="pr-open-q">114. Ha altre preoccupazioni riguardo a questo/a alunno/a?</div>
+      <div class="pr-open-a">${r.q114||''}</div>
+    </div>
+    <div class="pr-open">
+      <div class="pr-open-q">115. Quali sono le abilità o i punti di forza di questo/a alunno/a?</div>
+      <div class="pr-open-a">${r.q115||''}</div>
+    </div>
+
+    <div class="pr-footer">Conners 3® | Questionario – Forma estesa – Insegnante &nbsp;·&nbsp; Pagina 3</div>
+  </div>`;
+
+  document.getElementById('pr-content').innerHTML=html;
+  // Hide all pages, show print area
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.getElementById('print-area').classList.add('on');
+  window.scrollTo(0,0);
+}
+
+function hidePrint(){
+  document.getElementById('print-area').classList.remove('on');
+  goto('dash');
+}
+
+// ============================================================
+// RIEPILOGO
+// ============================================================
+function drawRiep(){
+  const fA=document.getElementById('rf-alu').value;
+  const fD=document.getElementById('rf-doc').value;
+
+  // Rebuild selects
+  const aSet=[...new Set(responses.map(r=>r.alu.nome).filter(Boolean))];
+  const dSet=[...new Set(responses.map(r=>r.ins.nome).filter(Boolean))];
+  const selA=document.getElementById('rf-alu'), selD=document.getElementById('rf-doc');
+  selA.innerHTML='<option value="">Tutti</option>'+aSet.map(n=>`<option value="${n}"${n===fA?' selected':''}>${n}</option>`).join('');
+  selD.innerHTML='<option value="">Tutti</option>'+dSet.map(n=>`<option value="${n}"${n===fD?' selected':''}>${n}</option>`).join('');
+
+  const filtered=responses.filter(r=>{
+    if(fA && r.alu.nome!==fA)return false;
+    if(fD && r.ins.nome!==fD)return false;
+    return true;
+  });
+  if(!filtered.length){
+    document.getElementById('riep-tbody').innerHTML='<tr><td colspan="8" style="text-align:center;color:#bbb;padding:2rem">Nessun dato</td></tr>';
+    document.getElementById('score-dist').innerHTML='';
+    return;
+  }
+
+  // global dist
+  const tot=[0,0,0,0]; let grand=0;
+  filtered.forEach(r=>r.ans.forEach(a=>{if(a!==null){tot[a]++;grand++;}}));
+  const cols=['#3b82f6','#16a34a','#d97706','#dc2626'];
+  document.getElementById('score-dist').innerHTML=[0,1,2,3].map(v=>`
+    <div class="sbar">
+      <div class="sbar-lbl" style="color:${cols[v]}">${v}</div>
+      <div class="sbar-tr"><div class="sbar-fl" style="width:${grand?tot[v]/grand*100:0}%;background:${cols[v]}"></div></div>
+      <div class="sbar-ct">${tot[v]} (${grand?Math.round(tot[v]/grand*100):0}%)</div>
+    </div>`).join('');
+
+  // per-item
+  document.getElementById('riep-tbody').innerHTML=ITEMS.map((txt,i)=>{
+    const vals=filtered.map(r=>r.ans[i]).filter(a=>a!==null);
+    if(!vals.length) return`<tr><td style="color:#ddd;font-size:.7rem">${i+1}</td><td style="color:#ddd">${txt.substring(0,60)}…</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:#ddd">0</td></tr>`;
+    const mean=(vals.reduce((s,v)=>s+v,0)/vals.length).toFixed(2);
+    const counts=[0,1,2,3].map(v=>vals.filter(x=>x===v).length);
+    const m=parseFloat(mean);
+    const cc=m<1?cols[0]:m<2?cols[1]:m<2.5?cols[2]:cols[3];
+    return`<tr>
+      <td style="color:#bbb;font-size:.7rem">${i+1}</td>
+      <td>${txt}</td>
+      <td><span class="chip" style="background:${cc}">${mean}</span></td>
+      ${counts.map((c,vi)=>`<td style="color:${cols[vi]};font-weight:700">${c}</td>`).join('')}
+      <td style="color:#aaa">${vals.length}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ============================================================
+// NAV
+// ============================================================
+function goto(name){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('pg-'+name).classList.add('on');
+  const idx=['form','dash','riep'].indexOf(name);
+  document.querySelectorAll('.nav-tab')[idx].classList.add('on');
+  document.getElementById('print-area').classList.remove('on');
+  if(name==='dash'){drawDash();}
+  if(name==='riep'){drawRiep();}
+}
+
+function updateCount(){
+  document.getElementById('cnt').textContent=responses.length;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+buildForm();
+loadData().then(()=>{drawDash();drawRiep();});
+</script>
+</body>
+</html>
